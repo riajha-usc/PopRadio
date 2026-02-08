@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:7
+    container_name: popradio-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: popradio
+    networks:
+      - popradio-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: popradio-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - popradio-network
+
+  # Backend API
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: popradio-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/popradio
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ALLOWED_ORIGINS=http://localhost:5173
+      - MAX_LIKES_PER_HOUR=100
+      - MAX_COMMENTS_PER_HOUR=30
+      - SYNC_INTERVAL_MINUTES=5
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - popradio-network
+    command: npm run dev
+
+  # Sync Worker
+  sync-worker:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: popradio-sync
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongo:27017/popradio
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - SYNC_INTERVAL_MINUTES=5
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - popradio-network
+    command: npm run sync
+
+  # Frontend Client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: popradio-client
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - popradio-network
+    command: npm run dev
+
+networks:
+  popradio-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  redis_data:
