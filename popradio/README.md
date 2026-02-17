@@ -1,22 +1,18 @@
-# 🎵 PopRadio - Y2K Music Video Radio Platform
+# PopRadio - Y2K Music Video Radio Platform
 
 A curated music video radio platform built with MERN stack, Redis, and a dreamy Y2K aesthetic. Built for 100k+ concurrent anonymous users with high-performance atomic operations.
 
-![PopRadio](https://img.shields.io/badge/Stack-MERN-pink?style=for-the-badge)
-![Redis](https://img.shields.io/badge/Cache-Redis-red?style=for-the-badge)
-![Y2K](https://img.shields.io/badge/Aesthetic-Y2K-purple?style=for-the-badge)
+## Features
 
-## ✨ Features
+- Radio Stream - Continuous music video playback
+- Anonymous Likes - No login required
+- Comments - Engage with the community
+- Y2K Aesthetic - Dreamy pastel design with soft animations
+- High Performance - Redis atomic counters for scalability
+- Session-based - Anonymous user identity
+- Curated Content - Admin-controlled songs and playlists
 
-- 📻 **Radio Stream** - Continuous music video playback
-- 💕 **Anonymous Likes** - No login required
-- 💬 **Comments** - Engage with the community
-- 🎨 **Y2K Aesthetic** - Dreamy pastel design with soft animations
-- ⚡ **High Performance** - Redis atomic counters for scalability
-- 🔐 **Session-based** - Anonymous user identity
-- 🎵 **Curated Content** - Admin-controlled songs and playlists
-
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────┐
@@ -38,27 +34,27 @@ A curated music video radio platform built with MERN stack, Redis, and a dreamy 
 └──────┴──────┘
 ```
 
-## 📦 Tech Stack
+## Tech Stack
 
 ### Backend
-- **Node.js** - Runtime
-- **Express.js** - Web framework
-- **MongoDB** - Primary database
-- **Mongoose** - ODM
-- **Redis** - Caching & atomic operations
-- **ioredis** - Redis client
+- Node.js - Runtime
+- Express.js - Web framework
+- MongoDB - Primary database
+- Mongoose - ODM
+- Redis - Caching & atomic operations
+- ioredis - Redis client
 
 ### Frontend
-- **React 18** - UI library
-- **Vite** - Build tool
-- **Framer Motion** - Animations
-- **Axios** - HTTP client
+- React 18 - UI library
+- Vite - Build tool
+- Framer Motion - Animations
+- Axios - HTTP client
 
 ### Infrastructure
-- **Docker** - Containerization
-- **NGINX** - Load balancing (production)
+- Docker - Containerization
+- NGINX - Load balancing (production)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -114,7 +110,7 @@ npm run dev
 - Backend API: http://localhost:3000
 - Health Check: http://localhost:3000/health
 
-## 🔧 Configuration
+## Configuration
 
 ### Backend Environment Variables
 
@@ -143,7 +139,7 @@ MAX_PLAYS_PER_HOUR=1000
 SYNC_INTERVAL_MINUTES=5
 ```
 
-## 📊 Database Setup
+## Database Setup
 
 ### Initialize MongoDB
 
@@ -159,9 +155,9 @@ use popradio
 
 ### Seed Data (Optional)
 
-Create a seed script to populate initial songs and playlists:
+Create a seed script to populate initial songs and playlists.
 
-## 🔄 Redis-MongoDB Sync
+## Redis-MongoDB Sync
 
 The sync worker runs periodically to sync Redis counters to MongoDB:
 
@@ -174,7 +170,7 @@ pm2 start server.js --name popradio-api
 pm2 start workers/syncWorker.js --name popradio-sync
 ```
 
-## 🎨 Frontend Customization
+## Frontend Customization
 
 ### Y2K Theme Colors
 
@@ -193,10 +189,10 @@ The app uses CSS custom properties for easy theming:
 ### Fonts
 
 Uses Google Fonts:
-- **Comfortaa** - Body text
-- **Fredoka** - Headings
+- Comfortaa - Body text
+- Fredoka - Headings
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Songs
 
@@ -230,7 +226,7 @@ GET    /api/radio/stream          - Get current stream
 POST   /api/radio/next            - Skip to next song
 ```
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Development
 
@@ -261,7 +257,7 @@ docker run -d --name popradio-client \
   popradio-client
 ```
 
-## 📈 Performance Optimization
+## Performance Optimization
 
 ### Redis Atomic Counters
 
@@ -288,15 +284,15 @@ minPoolSize: 10
 - Featured playlists: 10 min cache
 - Song details: 1 hour cache
 
-## 🔒 Security
+## Security
 
-- **Rate Limiting** - Per IP and session
-- **Input Validation** - All user inputs sanitized
-- **Helmet.js** - Security headers
-- **CORS** - Configured origins
-- **Session Management** - UUID-based anonymous sessions
+- Rate Limiting - Per IP and session
+- Input Validation - All user inputs sanitized
+- Helmet.js - Security headers
+- CORS - Configured origins
+- Session Management - UUID-based anonymous sessions
 
-## 📊 Monitoring
+## Monitoring
 
 ### Health Check
 
@@ -321,7 +317,7 @@ curl http://localhost:3000/health
 - Rate limit hits
 - Error rates
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Backend tests (TODO)
@@ -333,7 +329,7 @@ cd client
 npm test
 ```
 
-## 🚀 Production Deployment
+## Production Deployment
 
 ### 1. Environment Setup
 
@@ -399,7 +395,7 @@ server {
 }
 ```
 
-## 🎯 Scaling to 100+ Users
+## Scaling to 100+ Users
 
 ### Horizontal Scaling
 
@@ -429,7 +425,7 @@ const cluster = new Redis.Cluster([
 - Upload album art, videos to S3/CloudFront
 - Update `albumArt` and `videoUrl` fields with CDN URLs
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### MongoDB Connection Issues
 
@@ -457,18 +453,18 @@ redis-cli ping
 lsof -ti:3000 | xargs kill -9
 ```
 
-## 📝 License
+## License
 
 MIT
 
-## 🤝 Contributing
+## Contributing
 
 Contributions welcome! Please open an issue or PR.
 
-## 📧 Support
+## Support
 
 For issues and questions, please open a GitHub issue.
 
 ---
 
-Built with 💕 by the PopRadio team
+Built by the PopRadio team (Ria..:))
