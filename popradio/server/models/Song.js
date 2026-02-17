@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const songSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -69,3 +71,5 @@ songSchema.index({ isActive: 1, likes: -1 });
 songSchema.index({ isActive: 1, plays: -1 });
 songSchema.index({ genre: 1 });
 songSchema.index({ artist: 1 });
+
+module.exports = mongoose.model('Song', songSchema);
