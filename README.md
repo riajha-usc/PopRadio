@@ -91,7 +91,7 @@ cd server
 node scripts/SeedData.js
 ```
 
-## Redis–MongoDB Sync
+## Redis-MongoDB Sync
 The sync worker runs periodically to flush Redis counters to MongoDB:
 ```bash
 npm run sync
