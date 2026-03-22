@@ -1,4 +1,4 @@
-# PopRadio 🎵
+# PopRadio
 A curated music video radio platform built with MERN stack, Redis, and a dreamy Y2K aesthetic.
 
 ## Features
